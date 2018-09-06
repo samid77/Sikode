@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
   render() {
@@ -15,11 +16,11 @@ class Navbar extends Component {
                     {/* Collect the nav links, forms, and other content for toggling */}
                     <div className="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul className="nav navbar-nav">
-                            <li className="active"><a><i className="fa fa-home"></i>   <span className="sr-only">(current)</span></a></li>
+                            <li className="active"><Link to="/"><i className="fa fa-home"></i>   <span className="sr-only">(current)</span></Link></li>
                             <li className="dropdown">
                                 <a className="dropdown-toggle" data-toggle="dropdown">Dropdown <span className="caret" /></a>
                                 <ul className="dropdown-menu" role="menu">
-                                    <li><a>Action</a></li>
+                                    <li><Link to="/questionform">Post Your Question</Link></li>
                                     <li><a>Another action</a></li>
                                     <li><a>Something else here</a></li>
                                     <li className="divider" />
