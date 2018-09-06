@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2018 at 12:03 PM
+-- Generation Time: Sep 06, 2018 at 12:17 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Sikode`
+-- Database: `sikode`
 --
 
 -- --------------------------------------------------------
@@ -32,12 +32,24 @@ CREATE TABLE `answer` (
   `id` bigint(20) NOT NULL,
   `answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `answer_img` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `views` int(11) NOT NULL,
   `users_id` bigint(20) NOT NULL,
   `question_id` bigint(20) NOT NULL,
   `is_approved` set('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `answer`
+--
+
+INSERT INTO `answer` (`id`, `answer`, `answer_img`, `users_id`, `question_id`, `is_approved`, `created`) VALUES
+(1, 'css itu cascading style. itu lho, yang buat tampilan web menarik.', '', 7, 3, '1', '2018-09-06 10:10:31'),
+(2, 'lo bercanda apa ngajak berantem nih? :D', '', 9, 3, '1', '2018-09-06 10:10:31'),
+(3, 'coba cek url nya, dah bener belum?', '', 8, 1, '1', '2018-09-06 10:12:34'),
+(4, 'coba dibawa ke service center laptop axioo nya', '', 10, 1, '0', '2018-09-06 10:12:34'),
+(5, 'ane juga gak tau, bantu up aja deh gan.', '', 7, 5, '1', '2018-09-06 10:14:20'),
+(6, 'nodejs itu buat backend react js buat frontend nya', '', 8, 5, '1', '2018-09-06 10:14:20'),
+(7, 'soal fundamenta yak, gampang itumah. tinggal lo console log, isi deh dengan bintangnya. wakaka.', '', 6, 2, '1', '2018-09-06 10:15:29');
 
 -- --------------------------------------------------------
 
@@ -50,11 +62,20 @@ CREATE TABLE `question` (
   `question_title` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `question_content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `question_img` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `views` int(11) NOT NULL,
   `users_id` bigint(20) NOT NULL,
   `is_approved` set('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `question`
+--
+
+INSERT INTO `question` (`id`, `question_title`, `question_content`, `question_img`, `users_id`, `is_approved`, `created`) VALUES
+(1, 'Axios saya gak jalan', 'kenapa axios gak jalan padahal sudah diinstall modulenya', '', 6, '1', '2018-09-06 09:36:34'),
+(2, 'soal fundamental', 'gw dapet soal untuk buat bintang persegi, gimana caranya yak?', '', 8, '0', '2018-09-06 09:55:58'),
+(3, 'arti css', 'css apaan sih? game counter strike terbaru yak?', '', 10, '1', '2018-09-06 09:55:58'),
+(5, 'node js', 'node js buat apaan sih?', '', 7, '0', '2018-09-06 09:58:59');
 
 -- --------------------------------------------------------
 
@@ -68,6 +89,18 @@ CREATE TABLE `questiontagrelationship` (
   `tag_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `questiontagrelationship`
+--
+
+INSERT INTO `questiontagrelationship` (`id`, `question_id`, `tag_id`) VALUES
+(1, 3, 2),
+(2, 3, 6),
+(3, 5, 5),
+(4, 5, 6),
+(5, 1, 6),
+(6, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -79,6 +112,16 @@ CREATE TABLE `tag` (
   `tag` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `tag`
+--
+
+INSERT INTO `tag` (`id`, `tag`) VALUES
+(1, 'Javascript'),
+(2, 'CSS'),
+(5, 'Express Js'),
+(6, 'React Js');
+
 -- --------------------------------------------------------
 
 --
@@ -89,10 +132,22 @@ CREATE TABLE `users` (
   `id` bigint(20) NOT NULL,
   `fullname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `fullname`, `username`, `email`, `password`, `image`, `created`) VALUES
+(6, 'John Doe', 'john', 'john@gmail.com', 'john', 'BM logo.png', '2018-09-06 07:50:39'),
+(7, 'Adhi Nugraha', 'adhi', 'adhi@gmail.com', 'adhi', '', '2018-09-06 09:51:09'),
+(8, 'asril', 'asril', 'asril@outlook.com', 'asril', '', '2018-09-06 09:51:09'),
+(9, 'dimas', 'dimas', 'dimas@purwa.com', 'dimas', '', '2018-09-06 09:52:14'),
+(10, 'raton', 'raton', 'raton@yahoo.com', 'raton', '', '2018-09-06 09:52:14');
 
 -- --------------------------------------------------------
 
@@ -162,31 +217,31 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT for table `answer`
 --
 ALTER TABLE `answer`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `questiontagrelationship`
 --
 ALTER TABLE `questiontagrelationship`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `votes`
