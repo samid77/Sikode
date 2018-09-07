@@ -9,15 +9,15 @@ var app = express();
 const dbs = database.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: 'root',
     database: 'sikode',
-    port: '3306',
+    port: '8889',
     multipleStatements:true
 });
 dbs.connect();
 
 
-var port = 8002;
+var port = 8003;
 
 app.use(koneksi());
 app.use(upload());

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-// import Navbar from './Navbar';
-// import Footer from './Footer';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 class Homepage extends Component {
   render() {
     return (
       <div>
-       
+       <Navbar />
         <div className="content-wrapper">
             <div className="jumbotron text-center" style={{paddingBottom: '120px', backgroundColor: '#49cc7d'}}>
                 <h2 style={{color: '#0b3d89'}}>Search for something</h2>
@@ -22,7 +22,7 @@ class Homepage extends Component {
                     </form>
                 </div>
             </div>
-            <div className="container">
+            <div className="container" style={{minHeight: '600px'}}>
                 <section className="content">
                     <div className="col-md-4">
                         <div className="box box-widget">
@@ -81,7 +81,7 @@ class Homepage extends Component {
                 </section>
             </div>
         </div>
-        
+        <Footer />
       </div>
     )
   }
