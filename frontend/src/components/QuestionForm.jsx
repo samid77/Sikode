@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
+/** form question */
 class QuestionForm extends Component {
   render() {
     return(
