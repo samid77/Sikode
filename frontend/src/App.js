@@ -19,13 +19,11 @@ class App extends Component
   {
     return (
               <div>
-                <Navbar />
-                  <Route exact path="/" component={Homepage} />
-                  <Route exact path="/registration" component={Registration}/>
-                  <Route exact path="/login" component={Login}/>
-                  <Route path="/questionform" component={QuestionForm} />
-                  <Route path="/answerform" component={AnswerForm} />
-                <Footer />
+                <Route exact path="/" component={Homepage} />
+                <Route exact path="/registration" component={Registration}/>
+                <Route exact path="/login" component={Login}/>
+                <Route path="/questionform" component={QuestionForm} />
+                <Route path="/answerform" component={AnswerForm} />
               </div>
             );
   }

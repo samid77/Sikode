@@ -9,11 +9,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "body-parser": "^1.18.3",
+>>>>>>> b1410a0f1b05a7714d70478164ab28e4c67e5069
     "cors": "^2.8.4",
-    "crypto": "^1.0.1",
     "express": "^4.16.3",
     "express-fileupload": "^0.4.0",
+<<<<<<< HEAD
     "express-upload": "^0.1.0",
+=======
+>>>>>>> b1410a0f1b05a7714d70478164ab28e4c67e5069
     "mysql": "^2.16.0",
     "nodemon": "^1.18.4"
   }
