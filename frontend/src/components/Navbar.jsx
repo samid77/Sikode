@@ -16,7 +16,7 @@ class Navbar extends Component {
                     {/* Collect the nav links, forms, and other content for toggling */}
                     <div className="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul className="nav navbar-nav">
-                            <li className="active"><Link to="/"><i className="fa fa-home"></i>   <span className="sr-only">(current)</span></Link></li>
+                            <li><Link to="/"><i className="fa fa-home"></i>   <span className="sr-only">(current)</span></Link></li>
                             <li className="dropdown">
                                 <a className="dropdown-toggle" data-toggle="dropdown">Dropdown <span className="caret" /></a>
                                 <ul className="dropdown-menu" role="menu">
@@ -29,6 +29,7 @@ class Navbar extends Component {
                                     <li><a>One more separated link</a></li>
                                 </ul>
                             </li>
+                            <li><Link to="/questionform">Post the Question</Link></li>
                         </ul>
                     </div>
                     {/* /.navbar-collapse */}
