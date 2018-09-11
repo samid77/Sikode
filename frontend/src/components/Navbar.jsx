@@ -85,7 +85,7 @@ class Navbar extends Component
                     <nav className="navbar navbar-static-top" style={{backgroundColor: '#2eb282'}}>
                         <div className="container">
                             <div className="navbar-header">
-                                <a href="../../index2.html" className="navbar-brand"><b>Sikode</b></a>
+                                <Link to="/" className="navbar-brand"><b>Sikode</b></Link>
                                 <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                                     <i className="fa fa-bars" />
                                 </button>

@@ -37,53 +37,58 @@ export default class Login extends Component
   render() 
   {
     if(this.state.statusRedirect) return <Redirect to="/"/>
-    
+  
     return (
-            <div className="col-md-6">
-              <div className="box box-info" >
-                <div className="box-header with-border">
-                  <h3 className="box-title">Horizontal Form</h3>
-                </div>
-                {/* /.box-header */}
-
-                {/* form start */}
-                <form className="form-horizontal">
-                  <div className="box-body">
-                    <div className="form-group">
-                      <label htmlFor="username" className="col-sm-2 control-label">username</label>
-                      <div className="col-sm-10">
-                        <input type="text" ref="username" className="form-control" id="username" placeholder="username" />
-                      </div>
-                    </div>
-                    
-                    <div className="form-group">
-                      <label htmlFor="inputPassword3" className="col-sm-2 control-label">Password</label>
-                      <div className="col-sm-10">
-                        <input type="password" ref="password" className="form-control" id="inputPassword3" placeholder="Password" />
-                      </div>
-                    </div>
-
-                    <div className="form-group">
-                      <div className="col-sm-offset-2 col-sm-10">
-                        <div className="checkbox">
-                          <label>
-                            <input type="checkbox" /> Remember me
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* /.box-body */}
-
-                  <div className="box-footer">
-                    <button type="submit" className="btn btn-default">Cancel</button>
-                    <button type="button" onClick={() => this.fungsiLogin(this.refs)} className="btn btn-info pull-right" >Sign in</button>
-                  </div>
-                  {/* /.box-footer */}
-                </form>
-              </div>
-
+        <body className="hold-transition login-page" >
+        <div className="login-box">
+        <div className="login-logo">
+          <a href="../../index2.html"><b>Admin</b>LTE</a>
+        </div>
+        {/* /.login-logo */}
+        <div className="login-box-body">
+          <p className="login-box-msg">Sign in to start your session</p>
+          <form action="../../index2.html" method="post">
+            <div className="form-group has-feedback">
+              <input id="username" ref="username" type="text" className="form-control" placeholder="Username" />
+              {/* <span className="glyphicon glyphicon-envelope form-control-feedback" /> */}
             </div>
-            )
-  }
+            <div className="form-group has-feedback">
+              <input id="password" ref="password" type="password" className="form-control" placeholder="Password" />
+              <span className="glyphicon glyphicon-lock form-control-feedback" />
+            </div>
+            <div className="row">
+              <div className="col-xs-8">
+                <div className="icheckbox_square-blue">
+                  <label>
+                    <input type="checkbox" /> Remember Me
+                  </label>
+                </div>
+              </div>
+              {/* /.col */}
+              <div className="col-xs-4">
+                <button type="button" onClick={() => this.fungsiLogin(this.refs)} className="btn btn-info pull-right" className="btn btn-primary btn-block btn-flat">Sign In</button>
+              </div>
+              {/* /.col */}
+            </div>
+          </form>
+          <div className="social-auth-links text-center">
+            <p>- OR -</p>
+            <a href="#" className="btn btn-block btn-social btn-facebook btn-flat"><i className="fa fa-facebook" /> Sign in using
+              Facebook</a>
+            <a href="#" className="btn btn-block btn-social btn-google btn-flat"><i className="fa fa-google-plus" /> Sign in using
+              Google+</a>
+          </div>
+          {/* /.social-auth-links */}
+          <a href="#">I forgot my password</a><br />
+          <Link to="/register" className="text-center">Register a new membership</Link>
+        </div>
+        {/* /.login-box-body */}
+      </div>
+     
+    {/* /.login-box */}
+    {/* jQuery 3 */}
+    {/* Bootstrap 3.3.7 */}
+    {/* iCheck */}
+   </body>
+  )}
 }

@@ -37,7 +37,33 @@ app.listen(port, () =>
     console.log('Server berjalan di port '+port+' ....')
 });
 
-app.post('/tambahUser', (req, res) => 
+app.post('/tambahUser',(req, res) =>
+    {
+        var fullname = req.body.fullname;
+        var username = req.body.username;
+        var email = req.body.email;
+        var password = req.body.password;
+        console.log(fullname);
+        console.log(username);
+        console.log(email);
+        console.log(password);
+
+        var sql = `INSERT INTO users SET fullname= "${fullname}", username="${username}", 
+                    email= "${email}", password="${password}"`;
+                    dbs.query(sql, (kaloError, hasilnya) => 
+                    {
+                        if(kaloError)
+                        {
+                            throw kaloError;
+                        }
+                        else 
+                        {
+                            res.send('1')
+                        }
+                    })
+    });
+
+app.post('/editProfile', (req, res) => 
 {
     // ambil paramater dari fe, eg: namaproduk, harga, file
     
@@ -50,6 +76,8 @@ app.post('/tambahUser', (req, res) =>
     console.log(username);
     console.log(email);
     console.log(password);
+
+    var sql = `INSERT INTO users SET fullname= "${fullname}", username="${username}", email= "${email}", password="${password}", image="${fileName}"`;
     if (req.files)
     {
         var fungsiFile= req.files.file;
