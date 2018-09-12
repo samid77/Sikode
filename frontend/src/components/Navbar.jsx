@@ -11,6 +11,20 @@ class Navbar extends Component
     {
         userData: [0],
         userfullname: 'No Data',
+
+        dataTag: [],
+    }
+
+    componentWillMount()
+    {
+        axios.get('http://localhost:8003/datatag')
+        .then((ambilData) =>  {
+                                    this.setState(
+                                    {
+                                        dataTag: ambilData.data
+                                    });
+                                }
+            )
     }
 
     componentDidMount()
@@ -44,6 +58,17 @@ class Navbar extends Component
 
     render() 
     {
+        const hasiltag = this.state.dataTag.map(
+            (isi,urutan) =>
+            {
+                //var urut = urutan +1;
+                var tagID = isi.id;
+                var tagName = isi.tag;
+                var tagTotal = isi.total;
+
+                return  <li key={urutan} value={tagID}><Link to="#">{tagName} <span class="label label-primary pull-right">{tagTotal}</span></Link></li> 
+            });
+        
         const BtnOpt1 = <li className="dropdown user user-menu">
                             {/* Menu Toggle Button */}
                             <a className="dropdown-toggle" data-toggle="dropdown">
@@ -95,15 +120,18 @@ class Navbar extends Component
                                 <ul className="nav navbar-nav">
                                     <li><Link to="/"><i className="fa fa-home"></i>   <span className="sr-only">(current)</span></Link></li>
                                     <li className="dropdown">
-                                        <a className="dropdown-toggle" data-toggle="dropdown">Dropdown <span className="caret" /></a>
+                                        <a className="dropdown-toggle" data-toggle="dropdown">Popular Tags<span className="caret" /></a>
                                         <ul className="dropdown-menu" role="menu">
-                                            <li><Link to="/questionform">Post Your Question</Link></li>
+                                            {/* <li><Link to="/questionform">Post Your Question</Link></li>
                                             <li><a>Another action</a></li>
                                             <li><a>Something else here</a></li>
                                             <li className="divider" />
                                             <li><a>Separated link</a></li>
                                             <li className="divider" />
-                                            <li><a>One more separated link</a></li>
+                                            <li><a>One more separated link</a></li> */}
+                                            {hasiltag}
+                                            <li className="divider" />
+                                            <li><Link to="#">Others</Link></li>
                                         </ul>
                                     </li>
                                     <li><Link to="/questionform">Post the Question</Link></li>
