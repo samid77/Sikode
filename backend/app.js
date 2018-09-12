@@ -190,3 +190,14 @@ app.get('/recentquestion',(req, res) =>
         })
     }
 )
+
+app.get('/allquestion',(req, res) =>
+    {
+        var pullData = 'SELECT * FROM question ORDER BY id DESC'
+        dbs.query(pullData,(err, result) =>
+        {
+            if (err) throw err
+            res.send(result)
+        })
+    }
+)
