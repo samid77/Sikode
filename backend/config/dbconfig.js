@@ -2,9 +2,9 @@ const database = require('mysql');
 const dbs = database.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: 'root',
     database: 'sikode',
-    port: '3306',
+    port: '8889',
     multipleStatements:true
 });
 module.exports = dbs;
