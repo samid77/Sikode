@@ -25,6 +25,7 @@ class App extends Component
         <Route path="/questionform" component={QuestionForm} />
         <Route path="/answerform" component={AnswerForm} />
         <Route path="/questionlist" component={QuestionList} />
+        <Route path="/detail" component={Detail} />
       </div>
     );
   }

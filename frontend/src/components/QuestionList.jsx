@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -17,7 +18,7 @@ class QuestionList extends Component {
                                 <ul className="list-unstyled">
                                     <li style={{padding:'5px'}}>
                                         <h4><b>Lorem ipsum dolor sit amet</b></h4>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, dolorem distinctio! Dignissimos sint corporis quia hic temporibus! Mollitia aspernatur nostrum laudantium nihil odit at distinctio autem impedit, modi id harum.</p><a>See details ...</a>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, dolorem distinctio! Dignissimos sint corporis quia hic temporibus! Mollitia aspernatur nostrum laudantium nihil odit at distinctio autem impedit, modi id harum.</p><Link to="/detail"><a>See details ...</a></Link>
                                     </li>
                                     <div>
                                         <small class="label pull-right bg-green">Tag</small>
@@ -27,7 +28,7 @@ class QuestionList extends Component {
                                     <li style={{padding:'5px'}}>
                                         <h4><b>Lorem ipsum dolor sit amet</b></h4>
                                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, dolorem distinctio! Dignissimos sint corporis quia hic temporibus! Mollitia aspernatur nostrum laudantium nihil odit at distinctio autem impedit, modi id harum.</p>
-                                        <a>See details ...</a>
+                                        <Link to="/detail"><a>See details ...</a></Link>
                                     </li>
                                     <div>
                                         <small class="label pull-right bg-green">Tag</small>
@@ -38,7 +39,7 @@ class QuestionList extends Component {
                                     <li style={{padding:'5px'}}>
                                         <h4><b>Lorem ipsum dolor sit amet</b></h4>
                                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, dolorem distinctio! Dignissimos sint corporis quia hic temporibus! Mollitia aspernatur nostrum laudantium nihil odit at distinctio autem impedit, modi id harum.</p>
-                                        <a>See details ...</a>
+                                        <Link to="/detail"><a>See details ...</a></Link>
                                     </li>
                                     <div>
                                         <small class="label pull-right bg-green">Tag</small>
@@ -49,7 +50,7 @@ class QuestionList extends Component {
                                     <li style={{padding:'5px'}}>
                                         <h4><b>Lorem ipsum dolor sit amet</b></h4>
                                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, dolorem distinctio! Dignissimos sint corporis quia hic temporibus! Mollitia aspernatur nostrum laudantium nihil odit at distinctio autem impedit, modi id harum.</p>
-                                        <a>See details ...</a>
+                                        <Link to="/detail"><a>See details ...</a></Link>
                                     </li>
                                     <div>
                                         <small class="label pull-right bg-green">Tag</small>
@@ -60,7 +61,7 @@ class QuestionList extends Component {
                                     <li style={{padding:'5px'}}>
                                         <h4><b>Lorem ipsum dolor sit amet</b></h4>
                                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, dolorem distinctio! Dignissimos sint corporis quia hic temporibus! Mollitia aspernatur nostrum laudantium nihil odit at distinctio autem impedit, modi id harum. </p>
-                                        <a>See details ...</a>
+                                        <Link to="/detail"><Link to="/detail"><a>See details ...</a></Link></Link>
                                     </li>
                                     <div>
                                         <small class="label pull-right bg-green">Tag</small>
