@@ -6,15 +6,6 @@ const crypto = require('crypto');
 var koneksi = require('cors');
 var app = express();
 
-// const dbs = database.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '',
-//     database: 'sikode',
-//     port: '3306',
-//     multipleStatements:true
-// });
-// dbs.connect();
 const dbs = require('./config/dbconfig');
 
 var port = 8003;
@@ -192,6 +183,17 @@ app.post('/datauser', (req, res) =>
 app.get('/recentquestion',(req, res) =>
     {
         var pullData = 'SELECT * FROM question ORDER BY id DESC LIMIT 4'
+        dbs.query(pullData,(err, result) =>
+        {
+            if (err) throw err
+            res.send(result)
+        })
+    }
+)
+
+app.get('/allquestion',(req, res) =>
+    {
+        var pullData = 'SELECT * FROM question ORDER BY id DESC'
         dbs.query(pullData,(err, result) =>
         {
             if (err) throw err
