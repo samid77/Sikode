@@ -37,6 +37,19 @@ app.listen(port, () =>
     console.log('Server berjalan di port '+port+' ....')
 });
 
+app.get('/datatag', (req, res) =>
+{
+    //var pullTag = `SELECT * FROM tag`;
+    var pullTag = `SELECT tag.id, tag.tag, count(questiontagrelationship.tag_id) as total FROM tag join questiontagrelationship on tag.id = questiontagrelationship.tag_id group by questiontagrelationship.tag_id order by total DESC LIMIT 4`;
+    dbs.query(pullTag, (err,result) =>
+    {
+        if (err) throw err;
+
+        // console.log(result);
+        res.send(result);
+    })
+});
+
 app.post('/tambahUser',(req, res) =>
     {
         var fullname = req.body.fullname;
@@ -175,3 +188,4 @@ app.post('/datauser', (req, res) =>
         res.send(result);
     })
 });
+
