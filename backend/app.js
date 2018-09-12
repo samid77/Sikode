@@ -6,15 +6,6 @@ const crypto = require('crypto');
 var koneksi = require('cors');
 var app = express();
 
-// const dbs = database.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '',
-//     database: 'sikode',
-//     port: '3306',
-//     multipleStatements:true
-// });
-// dbs.connect();
 const dbs = require('./config/dbconfig');
 
 var port = 8003;

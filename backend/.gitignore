@@ -2,12 +2,8 @@
 
 /backup node_modules
 
-<<<<<<< HEAD
-package.json
-
-package-lock.json
-=======
 /package-lock.json
 
 /package.json
->>>>>>> 96e39e15e7475af9640205fce02467c2228beb58
+
+/config
