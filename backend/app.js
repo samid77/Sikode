@@ -189,8 +189,6 @@ app.post('/datauser', (req, res) =>
     })
 });
 
-<<<<<<< HEAD
-=======
 app.get('/recentquestion',(req, res) =>
     {
         var pullData = 'SELECT * FROM question ORDER BY id DESC LIMIT 4'
@@ -201,4 +199,3 @@ app.get('/recentquestion',(req, res) =>
         })
     }
 )
->>>>>>> 5bc4a703eab00923841bf62d4675c728eea673d8
