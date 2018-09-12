@@ -1,9 +1,29 @@
 import React, { Component } from 'react'
 import Navbar from './Navbar';
 import Footer from './Footer';
+import {Link} from 'react-router-dom';
+import axios from 'axios'
 
 class Homepage extends Component {
+    state={
+        question:[]
+    }
+    componentWillMount() {
+        axios.get('http://localhost:8003/recentquestion')
+        .then((ambilData)=>{
+          this.setState({question:ambilData.data,})
+          console.log(this.state.question)
+        })
+      }
+
   render() {
+    const list =this.state.question.map((item,urutan)=>{
+        var title=item.question_title;
+        var questionid = item.id;
+        return <li key={urutan} value={questionid} style={{padding:'5px'}}><Link to= '#'>{title}</Link></li>
+        
+    })
+    
     return (
       <div>
        <Navbar />
@@ -51,10 +71,11 @@ class Homepage extends Component {
                             </div>
                             <div className="box-body">
                                 <ul className="list-unstyled">
-                                    <li style={{padding:'5px'}}>Lorem ipsum dolor sit amet</li>
+                                    {/* <li style={{padding:'5px'}}>Lorem ipsum dolor sit amet</li>
                                     <li style={{padding:'5px'}}>Consectetur adipiscing elit</li>
                                     <li style={{padding:'5px'}}>Integer molestie lorem at massa</li>
-                                    <li style={{padding:'5px'}}>Facilisis in pretium nisl aliquet</li>
+                                    <li style={{padding:'5px'}}>Facilisis in pretium nisl aliquet</li> */}
+                                    {list}
                                 </ul>
                                 <a href="#"><p>See All ...</p></a>
                             </div>

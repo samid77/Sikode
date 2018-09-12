@@ -175,3 +175,14 @@ app.post('/datauser', (req, res) =>
         res.send(result);
     })
 });
+
+app.get('/recentquestion',(req, res) =>
+    {
+        var pullData = 'SELECT * FROM question ORDER BY id DESC LIMIT 4'
+        dbs.query(pullData,(err, result) =>
+        {
+            if (err) throw err
+            res.send(result)
+        })
+    }
+)
