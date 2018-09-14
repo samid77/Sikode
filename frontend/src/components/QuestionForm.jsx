@@ -1,10 +1,68 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import axios from 'axios';
+import {Redirect} from 'react-router-dom';
+import Cookies from 'universal-cookie';
+// import { connect } from 'react-redux';
+const cookies = new Cookies()
+
 
 /** form question */
 class QuestionForm extends Component {
+
+    state= {
+        Redirect:false
+    }
+
+    onchange = (e) => {
+        switch(e.target.name){
+          case 'image':
+          this.setState({
+            foto:e.target.files[0],
+          });
+          break;
+        }
+      }
+
+    value = (e) => {
+        var questiontitle = e.questiontitle.value;
+        var questioncontent = e.questioncontent.value; 
+        var usersid = cookies.get('sessionid')
+        var tags = e.tags.value
+              this.setState({
+                questiontitle: questiontitle,
+                questioncontent: questioncontent,
+                usersid:usersid,
+                tags:tags
+              }) 
+            }
+            
+      tambahData = (e) => {
+        e.preventDefault();
+        // 9. new form data seperti gudang/library. karena didalam form maka menggunakan append. kenapa menggunakan state karena state dia tas sudah diganti
+        let formData = new FormData();
+        formData.append('file', this.state.foto);
+        formData.append('title', this.state.questiontitle);
+        formData.append('content', this.state.questioncontent);
+        formData.append('usersid', this.state.usersid);
+        
+        axios.post('http://localhost:8003/addquestion', formData)
+        // .then((hasil) => 
+        // {
+        //   var respon = hasil.data;
+        //   console.log(respon) 
+        //   if(respon === 1) 
+        //   {
+        //     this.setState({
+        //       redirect: true
+        //     })
+        //   }
+        // })
+      }
+
   render() {
+    if(cookies.get('sessionid') === undefined) return <Redirect to="/login"/>
     return(
         <div>
             <Navbar />
@@ -19,7 +77,7 @@ class QuestionForm extends Component {
                             {/* /.box-header */}
 
                             {/* form start */}
-                            <form role="form">
+                            <form role="form" onSubmit={this.tambahData} encType="multipart/form-data">
                                 <div className="box-body">
                                     {/* <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">Email address</label>
@@ -47,7 +105,7 @@ class QuestionForm extends Component {
                                     
                                     <div className="form-group">
                                         <label htmlFor="exampleInputFile">Image</label>
-                                        <input type="file" id="exampleInputFile" />
+                                        <input type="file" name="image" onChange={this.onchange} id="exampleInputFile" />
                                         <p className="help-block">Example block-level help text here.</p>
                                     </div>
                                     
@@ -55,7 +113,7 @@ class QuestionForm extends Component {
                                         <label>Tag</label>
 
                                         <div className="input-group input-group-sm">
-                                            <select className="form-control">
+                                            <select ref="tags" className="form-control">
                                                 <option>--- Please choose the tag(s) ---</option>
                                                 <option>Javascript</option>
                                                 <option>React JS</option>
@@ -79,7 +137,7 @@ class QuestionForm extends Component {
                                 {/* /.box-body */}
 
                                 <div className="box-footer">
-                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                    <button type="submit" onClick={() => this.value(this.refs)} className="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                         </div>

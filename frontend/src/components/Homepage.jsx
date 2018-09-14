@@ -6,13 +6,14 @@ import axios from 'axios'
 
 class Homepage extends Component {
     state={
-        question:[]
+        question:[],
+        questionid:''
     }
     componentWillMount() {
         axios.get('http://localhost:8003/recentquestion')
         .then((ambilData)=>{
           this.setState({question:ambilData.data,})
-          console.log(this.state.question)
+        //   console.log(this.state.question)
         })
       }
 
@@ -20,7 +21,7 @@ class Homepage extends Component {
     const list =this.state.question.map((item,urutan)=>{
         var title=item.question_title;
         var questionid = item.id;
-        return <li key={urutan} value={questionid} style={{padding:'5px'}}><Link to= '#'>{title}</Link></li>
+        return <li key={urutan} value={questionid} style={{padding:'5px'}}><Link to={{pathname:'/detail', state: {questionid:questionid}}}>{title}</Link></li>
         
     })
     

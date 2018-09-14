@@ -15,7 +15,7 @@ app.use(upload());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use('/tampunganFile', express.static('tampunganFile'));
+app.use('/profpict', express.static('profpict'));
 
 app.get('/', () => {
     var sql = `SELECT * FROM users`;
@@ -47,10 +47,10 @@ app.post('/tambahUser',(req, res) =>
         var username = req.body.username;
         var email = req.body.email;
         var password = req.body.password;
-        console.log(fullname);
-        console.log(username);
-        console.log(email);
-        console.log(password);
+        // console.log(fullname);
+        // console.log(username);
+        // console.log(email);
+        // console.log(password);
 
         var sql = `INSERT INTO users SET fullname= "${fullname}", username="${username}", 
                     email= "${email}", password="${password}"`;
@@ -168,7 +168,7 @@ app.post('/userlogin', (req, res) =>
 app.post('/datauser', (req, res) =>
 {
     var userID  = req.body.userID;
-    console.log(userID)
+    // console.log(userID)
 
     var pullData = `SELECT * FROM users WHERE id="${userID}"`;
     dbs.query(pullData, (err,result) =>
@@ -201,3 +201,83 @@ app.get('/allquestion',(req, res) =>
         })
     }
 )
+
+app.get('/getdetail/:id', (req, res) => {
+    /** Menyiapkan query untuk ke MySQL */
+    console.log(req.params.id)
+    var grabData = `SELECT * FROM question JOIN users ON question.users_id=users.id WHERE question.id= "${req.params.id}"`;
+    /** Mengeksekusi query dengan syntax nodeJS */
+    dbs.query(grabData, (err, hasilquery) => {
+        if(err){
+            /** Mengeluarkan pesan error apabila terjadi kesalahan */
+            throw err;
+        } else {
+            /** Menyiapkan hasil query untuk siap dikirim */
+            // console.log(hasilquery)
+            res.send(hasilquery);
+        }
+    })
+});
+
+app.post('/addquestion', (req, res) => 
+{
+    // ambil paramater dari fe, eg: namaproduk, harga, file
+    
+    var title = req.body.title;
+    var content = req.body.content;
+    var usersid = req.body.usersid;
+    
+    // console.log(title);
+    // console.log(content);
+    
+    // var sql = `INSERT INTO question SET question_title= "${title}", question_content="${content}", question_img="${fileName}"`;
+    if (req.files)
+    {
+        var fungsiFile= req.files.file;
+        var fileName = req.files.file.name;
+        
+    
+        fungsiFile.mv("./profpict/" + fileName,(kaloError) => 
+        {
+            if(kaloError)
+            {
+            //    console.log(kaloError);
+                res.send('upload failed');
+            }
+            else 
+            {
+            //    res.send('upload sukses');
+            //    var sql = `INSERT INTO users VALUES("${''}", "${fullname}", "${username}", "${email}", "${password}", "${fileName}")`;
+            var sql = `INSERT INTO question SET question_title= "${title}", question_content="${content}", question_img="${fileName}", users_id="${usersid}" `;
+                dbs.query(sql, (kaloError, hasilnya) => 
+                {
+                    if(kaloError)
+                    {
+                        throw kaloError;
+                    }
+                    else 
+                    {
+                        res.send('1')
+                    }
+                });
+            }
+        })
+    }
+    else
+    {
+        // beda menggunakan SET dan VALUES, kalau values semua harus diisi. sedang SET hanya yang ditentukan saja yang diisi
+        // var sql = `INSERT INTO users VALUES("${''}", "${fullname}", "${username}", "${email}", "${password}", "${null}")`;
+        var sql = `INSERT INTO question SET question_title= "${title}", question_content="${content}", question_img="${fileName}", users_id="${usersid}"`;
+        dbs.query(sql, (kaloError, hasilnya) => 
+        {
+            if(kaloError)
+            {
+                throw kaloError;
+            }
+            else 
+            {
+                res.end('Data berhasil disimpan')
+            }
+        });
+    }
+});

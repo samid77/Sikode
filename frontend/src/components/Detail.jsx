@@ -1,9 +1,56 @@
 import React, { Component } from 'react'
+import { Link, Redirect } from 'react-router-dom'
 import Navbar from './Navbar';
 import Footer from './Footer';
+import axios from 'axios';
 
 class Detail extends Component {
+
+  state = {
+    question:[],
+    title:'',
+    content:'',
+    questionimg:'',
+
+    Redirect:false
+  }
+
+  componentWillMount(){
+    var id_sblm = this.props.location.state.questionid;
+    var self = this
+    axios.get('http://localhost:8003/getdetail/'+id_sblm)
+    .then(
+        (hasilAmbil) => {
+        // console.log(hasilAmbil.data);
+        // console.log(hasilAmbil.data[0].question_content);
+        // console.log(hasilAmbil.data[0].users_id);
+        // console.log(hasilAmbil.data[0].question_img);
+        // console.log(hasilAmbil.data[0].question_title);
+
+        self.setState({
+            title: hasilAmbil.data[0].question_title,
+            content: hasilAmbil.data[0].question_content,
+            username: hasilAmbil.data[0].username,
+            questionimg: hasilAmbil.data[0].question_img
+        });   
+    });
+  }
+
   render() {
+    const pict = <div className="attachment-block clearfix">
+                  <img className="attachment-img" src={'http://localhost:8003/profpict/'+this.state.questionimg} alt="Attachment Image" />
+                  <div className="attachment-pushed">
+                    <h4 className="attachment-heading"><a href="http://www.lipsum.com/">Lorem ipsum text generator</a></h4>
+                    <div className="attachment-text">
+                      Description about the attachment can be placed here.
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
+                    </div>
+                    {/* /.attachment-text */}
+                  </div>
+                  {/* /.attachment-pushed */}
+                 </div>
+    const defpict = (this.state.questionimg !== "undefined") ? pict:<div></div>
+    // console.log(this.state.questionimg)
     return (
       <div>
         <Navbar />
@@ -13,10 +60,11 @@ class Detail extends Component {
                 <div className="col-md-8">
                   <div className="box box-widget">
                     <div className="box-header with-border">
-                      <h3><b>Question title</b></h3>
+                      <h3><b>{this.state.title}</b></h3>
                       <div className="user-block">
                         <img className="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image" />
-                        <span className="username"><a href="#">Jonathan Burke Jr.</a></span>
+                        {/* <span className="username"><a href="#">Jonathan Burke Jr.</a></span> */}
+                        <span className="username"><a href="#">{this.state.username}</a></span>
                         <span className="description">Shared publicly - 7:30 PM Today</span>
                       </div>
                       {/* /.user-block */}
@@ -24,16 +72,17 @@ class Detail extends Component {
                     {/* /.box-header */}
                     <div className="box-body">
                       {/* post text */}
-                      <p>Far far away, behind the word mountains, far from the
+                      {/* <p>Far far away, behind the word mountains, far from the
                         countries Vokalia and Consonantia, there live the blind
                         texts. Separated they live in Bookmarksgrove right at</p>
                       <p>the coast of the Semantics, a large language ocean.
                         A small river named Duden flows by their place and supplies
                         it with the necessary regelialia. It is a paradisematic
                         country, in which roasted parts of sentences fly into
-                        your mouth.</p>
+                        your mouth.</p> */}
+                        <p>{this.state.content}</p>
                       {/* Attachment */}
-                      <div className="attachment-block clearfix">
+                      {/* <div className="attachment-block clearfix">
                         <img className="attachment-img" src="../dist/img/photo1.png" alt="Attachment Image" />
                         <div className="attachment-pushed">
                           <h4 className="attachment-heading"><a href="http://www.lipsum.com/">Lorem ipsum text generator</a></h4>
@@ -41,10 +90,12 @@ class Detail extends Component {
                             Description about the attachment can be placed here.
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
                           </div>
-                          {/* /.attachment-text */}
+                          /.attachment-text
                         </div>
-                        {/* /.attachment-pushed */}
-                      </div>
+                        /.attachment-pushed
+                      </div> */}
+                      {defpict}
+
                       {/* /.attachment-block */}
                       {/* Social sharing buttons */}
                       <button type="button" className="btn btn-default btn-xs"><i className="fa fa-share" /> Share</button>

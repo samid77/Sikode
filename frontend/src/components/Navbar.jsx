@@ -103,7 +103,7 @@ class Navbar extends Component
         
         const BtnOpt2 = <li><Link to="/login">Sign In</Link></li>
 
-        const BtnDefaultOpt = (this.state.userfullname != 'No Data') ? BtnOpt1 : BtnOpt2
+        const BtnDefaultOpt = (this.state.userfullname !== 'No Data') ? BtnOpt1 : BtnOpt2
         
         return (
                 <header className="main-header">
