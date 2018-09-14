@@ -192,12 +192,20 @@ app.get('/recentquestion',(req, res) =>
 )
 
 app.get('/allquestion',(req, res) =>
+{
+    var pullData = 'SELECT * FROM question WHERE is_approved = 1 ORDER BY id DESC'
+    dbs.query(pullData,(err, questionList) =>
     {
-        var pullData = 'SELECT * FROM question ORDER BY id DESC'
-        dbs.query(pullData,(err, result) =>
+        if (err) throw err;
+        
+        var pullTag = `SELECT questiontagrelationship.question_id, tag.tag FROM question JOIN questiontagrelationship ON question.id = questiontagrelationship.question_id JOIN tag ON questiontagrelationship.tag_id = tag.id WHERE question.is_approved = 1 ORDER BY question.id DESC`;
+        dbs.query(pullTag, (err,resultTag) => 
         {
-            if (err) throw err
-            res.send(result)
+            if (err) throw err;
+
+            var hasil = [{questionList},{resultTag}];
+
+            res.send(hasil)
         })
-    }
-)
+    })
+});
