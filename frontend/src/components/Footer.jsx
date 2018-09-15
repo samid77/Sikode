@@ -5,7 +5,7 @@ class Footer extends Component {
     return (
       <div>
           <footer className="main-footer" style={{backgroundColor: '#2eb282', color: '#fff'}}>
-            <div className="container">
+            <div className="container ">
                 <div className="pull-right hidden-xs">
                 <b>Version</b> 1.0
                 </div>

@@ -23,8 +23,7 @@ class Navbar extends Component
                                     {
                                         dataTag: ambilData.data
                                     });
-                                }
-            )
+                                })
     }
 
     componentDidMount()
