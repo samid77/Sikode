@@ -12,7 +12,8 @@ export default class Register extends Component
 {
   state = 
   {  
-    redirect: false
+    redirect: false,
+    passConfirm:'',
   }
 
 
@@ -30,6 +31,17 @@ export default class Register extends Component
 
   value = (e) => 
   {
+    var pass1=e.password.value;
+    var pass2=e.passconfirm.value;
+    if(pass1 != pass2){
+      this.setState({
+      styleForm:'is-invalid'
+      })
+      alert('Please insert same password! ')
+    }else{
+      this.setState({
+        styleForm:'is-valid'
+      })
     axios.post('http://localhost:8003/tambahUser/',
     {
         fullname: e.fullname.value,
@@ -47,6 +59,7 @@ export default class Register extends Component
           })
         }
       })
+    }
   };
 
 
@@ -78,7 +91,11 @@ export default class Register extends Component
               <span className="glyphicon glyphicon-envelope form-control-feedback" />
             </div>
             <div className="form-group has-feedback">
-              <input id="password" ref="password" type="password" className="form-control" placeholder="Password" />
+              <input id="password" ref="password" type="password" className="form-control" placeholder="Password" required/>
+              <span className="glyphicon glyphicon-lock form-control-feedback" />
+            </div>
+            <div className="form-group has-feedback">
+              <input id="passconfirm" ref="passconfirm" type="password" className="form-control" placeholder="Password Confirmation" required/>
               <span className="glyphicon glyphicon-lock form-control-feedback" />
             </div>
             {/* <div className="form-group has-feedback">
@@ -95,7 +112,7 @@ export default class Register extends Component
               </div>
               {/* /.col */}
               <div className="col-xs-4">
-                <button button onClick={() => this.value(this.refs)} type="submit" className="btn btn-primary btn-block btn-flat">Register</button>
+                <button button onClick={() => this.value(this.refs)} type="submit" className="btn btn-success btn-block btn-flat">Register</button>
               </div>
               {/* /.col */}
             </div>
