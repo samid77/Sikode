@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2018 at 12:17 PM
+-- Generation Time: Sep 14, 2018 at 11:21 AM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -75,7 +75,7 @@ INSERT INTO `question` (`id`, `question_title`, `question_content`, `question_im
 (1, 'Axios saya gak jalan', 'kenapa axios gak jalan padahal sudah diinstall modulenya', '', 6, '1', '2018-09-06 09:36:34'),
 (2, 'soal fundamental', 'gw dapet soal untuk buat bintang persegi, gimana caranya yak?', '', 8, '0', '2018-09-06 09:55:58'),
 (3, 'arti css', 'css apaan sih? game counter strike terbaru yak?', '', 10, '1', '2018-09-06 09:55:58'),
-(5, 'node js', 'node js buat apaan sih?', '', 7, '0', '2018-09-06 09:58:59');
+(5, 'node js', 'node js buat apaan sih?', '', 7, '1', '2018-09-13 08:35:16');
 
 -- --------------------------------------------------------
 
@@ -99,7 +99,9 @@ INSERT INTO `questiontagrelationship` (`id`, `question_id`, `tag_id`) VALUES
 (3, 5, 5),
 (4, 5, 6),
 (5, 1, 6),
-(6, 2, 1);
+(6, 2, 1),
+(7, 2, 1),
+(8, 2, 7);
 
 -- --------------------------------------------------------
 
@@ -120,7 +122,8 @@ INSERT INTO `tag` (`id`, `tag`) VALUES
 (1, 'Javascript'),
 (2, 'CSS'),
 (5, 'Express Js'),
-(6, 'React Js');
+(6, 'React Js'),
+(7, 'Python');
 
 -- --------------------------------------------------------
 
@@ -145,7 +148,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `fullname`, `username`, `email`, `password`, `image`, `created`) VALUES
 (6, 'John Doe', 'john', 'john@gmail.com', 'john', 'BM logo.png', '2018-09-06 07:50:39'),
 (7, 'Adhi Nugraha', 'adhi', 'adhi@gmail.com', 'adhi', '', '2018-09-06 09:51:09'),
-(8, 'asril', 'asril', 'asril@outlook.com', 'asril', '', '2018-09-06 09:51:09'),
+(8, 'Asril Irsadi', 'asril', 'asril@outlook.com', 'asril', '', '2018-09-10 07:20:21'),
 (9, 'dimas', 'dimas', 'dimas@purwa.com', 'dimas', '', '2018-09-06 09:52:14'),
 (10, 'raton', 'raton', 'raton@yahoo.com', 'raton', '', '2018-09-06 09:52:14');
 
@@ -229,13 +232,13 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `questiontagrelationship`
 --
 ALTER TABLE `questiontagrelationship`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`

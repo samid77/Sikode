@@ -192,92 +192,20 @@ app.get('/recentquestion',(req, res) =>
 )
 
 app.get('/allquestion',(req, res) =>
-    {
-        var pullData = 'SELECT * FROM question ORDER BY id DESC'
-        dbs.query(pullData,(err, result) =>
-        {
-            if (err) throw err
-            res.send(result)
-        })
-    }
-)
-
-app.get('/getdetail/:id', (req, res) => {
-    /** Menyiapkan query untuk ke MySQL */
-    console.log(req.params.id)
-    var grabData = `SELECT * FROM question JOIN users ON question.users_id=users.id WHERE question.id= "${req.params.id}"`;
-    /** Mengeksekusi query dengan syntax nodeJS */
-    dbs.query(grabData, (err, hasilquery) => {
-        if(err){
-            /** Mengeluarkan pesan error apabila terjadi kesalahan */
-            throw err;
-        } else {
-            /** Menyiapkan hasil query untuk siap dikirim */
-            // console.log(hasilquery)
-            res.send(hasilquery);
-        }
-    })
-});
-
-app.post('/addquestion', (req, res) => 
 {
-    // ambil paramater dari fe, eg: namaproduk, harga, file
-    
-    var title = req.body.title;
-    var content = req.body.content;
-    var usersid = req.body.usersid;
-    
-    // console.log(title);
-    // console.log(content);
-    
-    // var sql = `INSERT INTO question SET question_title= "${title}", question_content="${content}", question_img="${fileName}"`;
-    if (req.files)
+    var pullData = 'SELECT * FROM question WHERE is_approved = 1 ORDER BY id DESC'
+    dbs.query(pullData,(err, questionList) =>
     {
-        var fungsiFile= req.files.file;
-        var fileName = req.files.file.name;
+        if (err) throw err;
         
-    
-        fungsiFile.mv("./profpict/" + fileName,(kaloError) => 
+        var pullTag = `SELECT questiontagrelationship.question_id, tag.tag FROM question JOIN questiontagrelationship ON question.id = questiontagrelationship.question_id JOIN tag ON questiontagrelationship.tag_id = tag.id WHERE question.is_approved = 1 ORDER BY question.id DESC`;
+        dbs.query(pullTag, (err,resultTag) => 
         {
-            if(kaloError)
-            {
-            //    console.log(kaloError);
-                res.send('upload failed');
-            }
-            else 
-            {
-            //    res.send('upload sukses');
-            //    var sql = `INSERT INTO users VALUES("${''}", "${fullname}", "${username}", "${email}", "${password}", "${fileName}")`;
-            var sql = `INSERT INTO question SET question_title= "${title}", question_content="${content}", question_img="${fileName}", users_id="${usersid}" `;
-                dbs.query(sql, (kaloError, hasilnya) => 
-                {
-                    if(kaloError)
-                    {
-                        throw kaloError;
-                    }
-                    else 
-                    {
-                        res.send('1')
-                    }
-                });
-            }
+            if (err) throw err;
+
+            var hasil = [{questionList},{resultTag}];
+
+            res.send(hasil)
         })
-    }
-    else
-    {
-        // beda menggunakan SET dan VALUES, kalau values semua harus diisi. sedang SET hanya yang ditentukan saja yang diisi
-        // var sql = `INSERT INTO users VALUES("${''}", "${fullname}", "${username}", "${email}", "${password}", "${null}")`;
-        var sql = `INSERT INTO question SET question_title= "${title}", question_content="${content}", question_img="${fileName}", users_id="${usersid}"`;
-        dbs.query(sql, (kaloError, hasilnya) => 
-        {
-            if(kaloError)
-            {
-                throw kaloError;
-            }
-            else 
-            {
-                res.end('Data berhasil disimpan')
-            }
-        });
-    }
+    })
 });

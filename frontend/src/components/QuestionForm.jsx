@@ -25,7 +25,22 @@ class QuestionForm extends Component {
         }
       }
 
+    
+
     value = (e) => {
+        var questiontitle = e.questiontitle.value;
+        var questioncontent = e.questioncontent.value; 
+        var usersid = cookies.get('sessionid')
+        var tags = e.tags.value
+              this.setState({
+                questiontitle: questiontitle,
+                questioncontent: questioncontent,
+                usersid:usersid,
+                tags:tags
+              }) 
+            }
+            
+    add = (e) => {
         var questiontitle = e.questiontitle.value;
         var questioncontent = e.questioncontent.value; 
         var usersid = cookies.get('sessionid')
@@ -111,8 +126,16 @@ class QuestionForm extends Component {
                                     
                                     <div className="form-group">
                                         <label>Tag</label>
+                                            <select className="form-control select2" multiple="multiple" data-placeholder="Select a State" style={{width: '100%'}}>
+                                            <option>Javascript</option>
+                                            <option>React JS</option>
+                                            <option>Express JS</option>
+                                            <option>Node JS</option>
+                                            <option>React Native</option>
+                                            </select>
+                                        
 
-                                        <div className="input-group input-group-sm">
+                                        {/* <div className="input-group input-group-sm">
                                             <select ref="tags" className="form-control">
                                                 <option>--- Please choose the tag(s) ---</option>
                                                 <option>Javascript</option>
@@ -122,16 +145,16 @@ class QuestionForm extends Component {
                                                 <option>React Native</option>
                                             </select>    
                                             <span className="input-group-btn">
-                                                <button type="button" className="btn btn-info btn-flat">Add!</button>
+                                                <button refs="tambah" value='1' onClick={() => this.add(this.refs)} className="btn btn-info btn-flat">Add!</button>
                                             </span>
-                                        </div>
+                                        </div> */}
                                         <br />
-                                        <div className="input-group input-group-sm">
+                                        {/* <div className="input-group input-group-sm">
                                             <input type="text" className="form-control" placeholder="Please type your custom tag" />
                                             <span className="input-group-btn">
                                                 <button type="button" className="btn btn-info btn-flat">Add!</button>
                                             </span>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                                 {/* /.box-body */}
